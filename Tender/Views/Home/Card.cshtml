@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+@model Tender.Models.Card
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>Card</title>
+</head>
+<body>
+    <style>
+        td{
+            padding:4px;
+        }
+        a.next:link, a.next:visited {
+            margin-top:10px;
+            background-color: #e5e5e5;
+            color: black;
+            padding: 3px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        a.next:hover, a.next:active {
+            background-color: #bdbdbd;
+        }
+    </style>
+
+    <h2 align="center">Детальная информация</h2>
+    <table align="center" width="1200" border-color="grey" border="2">
+            <tr border="2px">
+                <td colspan="2">
+                    <p>Тендер № @Model.Id</p>
+                    <p>@Model.Subject</p>
+                    <p>@Model.Description</p>
+                    <p>@Model.Type.NameType</p>
+                    <p>@Model.Сategory.NameCategory</p>
+                </td>
+                <td valign="top">
+                    <p align="center">Статус</p><br />
+                    <p align="center">Начальная ставка @Model.Rate @Model.Сurrency.NameСurrency</p>
+                </td>
+            </tr>
+            <tr valign="top" height="150">
+                <td colspan="3">
+                    <span>Организатор</span><br>
+                    @Model.Sponsor
+                </td>
+            </tr>
+            <tr valign="top" height="150">
+                <td colspan="3">
+                    <span>Дата публикации: @Model.PublicationDate.ToString("dd/MM/yyyy")</span>
+                    <span>Прием предложений: @Model.Start.ToString("dd/MM/yyyy") - @Model.End.ToString("dd/MM/yyyy")</span>
+                </td>
+            </tr>
+    </table>
+    <p align="center"><a class="next" href='/Home/Index/?page=@Session["page"]&Type=@Session["Type"]&text=@Session["text"]&Sponsor=@Session["Sponsor"]&rate=@Session["Rate"]&time=@Session["Time"]&Category=@Session["Category"]'>Назад</a></p>
+</body>
+</html>

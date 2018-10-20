@@ -1,0 +1,94 @@
+﻿@using Tender.HtmlHelpers
+@model Tender.Models.PageModel.TenderListViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    td {
+        width: 280px;
+    }
+
+    .card {
+        border: 2px solid black;
+    }
+
+    .t1 {
+        border: 2px solid grey;
+    }
+
+    .t2 {
+        border: 2px solid grey;
+    }
+
+    .t3 {
+        border: 2px solid grey;
+    }
+
+    .pagelink {
+        margin-top: 10px;
+    }
+
+    .btn-active {
+        background-color: #808080b3;
+        color: white;
+    }
+
+    .search {
+        border: 2px solid grey;
+        padding:10px;
+    }
+</style>
+
+<table class="">
+    <tr>
+        <td height="20"></td>
+    </tr>
+
+    <tr>
+        <td colspan="3">
+            <form class="search" method="get" action="/Home/Index">
+                <input style="width:725px" type="text" name="text" placeholder="все тендеры" />
+                <input type="submit" value="поиск" />
+            </form>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="40"></td>
+    </tr>
+
+    @if (ViewBag.Search == null)
+    {
+        foreach (var b in Model.Cards)
+        {
+            <tr border="2">
+                <td class="t1">
+                    <span>№ тендера: @b.Id</span><br>
+                    <a href="/Home/Card/@b.Id">@b.Subject</a><br /><br />
+                    <span>@b.Sponsor</span>
+                </td>
+                <td class="t2">
+                    <p>Начальная ставка: @b.Rate <span>@b.Сurrency.NameСurrency</span>.</p>
+                </td>
+                <td class="t3">
+                    <p>Прием предложений<br><br> с @b.Start.ToString("dd/MM/yyyy")<br> по @b.End.ToString("dd/MM/yyyy")</p>
+                </td>
+            </tr>
+            <tr>
+                <td height="40"></td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr><td><p>@ViewBag.Search</p></td></tr>
+    }
+</table>
+
+@if (ViewBag.Search == null)
+{
+    <p class="pagelink" align="center">@Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x, text = Session["text"], Sponsor = @Session["Sponsor"], Type = @Session["Type"], rate = @Session["Rate"], time = @Session["Time"], Category = @Session["Category"], @class = "btn btn-default" }))</p>
+}
+

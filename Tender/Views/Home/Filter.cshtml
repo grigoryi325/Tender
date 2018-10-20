@@ -1,0 +1,26 @@
+﻿@model Tender.Models.Card
+<style>
+    .filtr {
+        border: 2px solid grey;
+        padding: 5px;
+        margin:5px;
+    }
+</style>
+
+<p align="center"><b>Фильтр</b></p>
+
+<form class="filtr" method="get" action="/Home/Index/">
+    <label>Организатор</label>
+    @Html.DropDownList("Sponsor", ViewBag.sponsor as SelectList, new { @class = "form-control" })<br>
+
+    <label>Вид тендера</label>
+    @Html.DropDownList("Type", ViewBag.types as SelectList, new { @class = "form-control" })<br>
+
+    <label>Дата ( C )</label><br>
+    <input class="form-control" type="date" name="StartData" required="" /><br>
+
+    <label>Дата ( ПО )</label><br>
+    <input class="form-control" type="date" name="EndData" required="" /><br>
+
+    <input type="submit" value="Фильтровать" />
+</form>

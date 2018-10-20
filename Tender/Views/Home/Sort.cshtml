@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Tender.Models.Сategory>
+
+<style>
+    .sort {
+        border: 2px solid grey;
+        padding: 5px;
+        margin: 5px;
+    }
+</style>
+
+<p align="center"><b>Сортировать</b></p>
+
+<form class="sort" method="get" action="/Home/Index">
+    <input type="hidden" class="category" id="@Convert.ToInt32(Session["Category"])">
+    <input type="hidden" class="time" id="@(Session["Time"].ToString())">
+    <input type="hidden" class="rate" id="@(Session["Rate"].ToString())">
+
+    <select name="rate" class="form-control">
+        <option value="">По умолчанию</option>
+        <option value="more">сначала дороже</option>
+        <option value="less">cчала дешевле</option>>
+    </select>
+    <input type="submit" id="send" value="Сортировать">
+    <br><br>
+    <select name="time" class="form-control">
+        <option value="">По умолчанию</option>
+        <option value="asc">cчала cтарые</option>>
+        <option value="desc">сначала новые</option>
+    </select>
+    <input type="submit" id="send" value="Сортировать">
+    <br><br>
+    <label>Категории</label>
+    <select name="Category" class="form-control">
+        <option value="0">Все категории</option>
+        @foreach (var s in Model)
+        {
+            <option value="@s.Id">@s.NameCategory</option>
+        }
+    </select>
+
+    <input type="submit" id="send" value="Сортировать">
+</form>

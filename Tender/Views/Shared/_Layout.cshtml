@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tender</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            margin:0;
+            padding:0;
+        }
+        .body_container {          
+            margin: 0 auto;
+            width: 1200px;
+        }
+        .left {
+            border: 2px solid grey;
+            float: left;
+            width: 350px;
+        }
+        .right {
+            border: 2px solid grey;
+            padding:10px;
+            float: right;
+            width: 840px;
+        }
+    </style>
+    <div class="body_container">
+        <div class="left">
+            <a href="/Home/AddTender">Добавить тендер</a>
+            @Html.Action("Filter", "Home")
+            @Html.Action("Sort", "Home")
+        </div>
+
+        <div class="right">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

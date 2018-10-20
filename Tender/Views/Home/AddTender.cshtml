@@ -1,0 +1,66 @@
+﻿@model Tender.Models.Card
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddTender</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        .form {
+            width: 400px;
+            margin-left:10px;
+            border:2px solid grey;
+            border-radius:5px;
+            padding:5px;
+        }
+        h2 {
+            margin-left: 10px;
+        }
+    </style>
+
+    <h2>Создать тендер</h2>
+
+    <div class="form">
+        <form method="post" action="/Home/AddTender">
+            <!--дата публикации-->
+            <input class="form-control" type="hidden" name="PublicationDate" value='@DateTime.Now' />
+
+            <label>Предмет тендера</label><br>
+            <input class="form-control" type="text" name="Subject" required="" /><br>
+
+            <label>Описание тендера</label><br>
+            <input class="form-control" type="text" name="Description" required="" /><br>
+
+            <label>Организатор тендера</label><br>
+            <input class="form-control" type="text" name="Sponsor" required="" /><br>
+
+            <label>Вид тендера</label><br>
+            @Html.DropDownListFor(model => model.TypeId, ViewBag.Types as SelectList, new { @class = "form-control" })<br>
+
+            <label>Категория/классификация</label><br>
+            @Html.DropDownListFor(model => model.СategoryId, ViewBag.Categories as SelectList, new { @class = "form-control" })<br>
+
+            <label>Начальная ставка/бюджет</label><br>
+            <input class="form-control" type="text" name="Rate" required="" /><br>
+
+            <label>Валюта тендера</label><br>
+            @Html.DropDownListFor(model => model.СurrencyId, ViewBag.Currencies as SelectList, new { @class = "form-control" })<br>
+
+            <label>Дата ( C )</label><br>
+            <input class="form-control" type="date" name="Start" required="" /><br>
+
+            <label>Дата ( ПО )</label><br>
+            <input class="form-control" type="date" name="End" required="" /><br>
+
+            <input class="btn btn-default" type="submit" value="Сохранить">
+        </form>
+    </div>
+</body>
+</html>
